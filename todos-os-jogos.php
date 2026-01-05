@@ -22,8 +22,8 @@ session_start();
             <nav class="main-nav">
                 <ul>
                     <li><a href="index.php">Home</a></li>
-                    <li><a href="todos-os-jogos.html">Xbox One</a></li>
-                    <li><a href="todos-os-jogos.html">Xbox Series X|S</a></li>
+                    <li><a href="todos-os-jogos.php">Xbox One</a></li>
+                    <li><a href="todos-os-jogos.php">Xbox Series X|S</a></li>
                     <li><a href="#">Minha Conta</a></li>
                 </ul>
             </nav>
@@ -47,27 +47,52 @@ session_start();
                 </select>
             </div>
         </section>
-            <div class="catalog-grid" id="games-container"></div>
 
+        <div class="catalog-grid" id="games-container"></div>
     </main>
+
     <div class="pagination-container">
-    <div class="pagination">
-        <a href="#" class="page-arrow disabled">&laquo;</a>
-        
-        <a href="todos-os-jogos.html" class="page-number active">1</a>
-        <a href="todos-os-jogos-p2.html" class="page-number">2</a>
-        <a href="todos-os-jogos-p3.html" class="page-number">3</a>
-        
-        <a href="todos-os-jogos-p2.html" class="page-arrow">&raquo;</a>
+        <div class="pagination">
+            <a href="#" class="page-arrow disabled">&laquo;</a>
+            <a href="todos-os-jogos.php" class="page-number active">1</a>
+            <a href="todos-os-jogos-p2.php" class="page-number">2</a>
+            <a href="todos-os-jogos-p3.php" class="page-number">3</a>
+            <a href="todos-os-jogos-p2.php" class="page-arrow">&raquo;</a>
+        </div>
     </div>
-</div>
+
     <footer class="main-footer">
         <div class="container">
             <p>&copy; 2025 Nito Play. Todos os direitos reservados.</p>
         </div>
     </footer>
 
-<script src="js/jogos.js"></script>
-<script src="js/catalogo.js"></script>
+    <script src="js/jogos.js"></script>
+    <script>
+        // Função para renderizar os jogos no container correto
+        function renderizarCatalogo() {
+            const container = document.getElementById('games-container');
+            if (!container) return;
+
+            // Limpa o "R$ 00,00" antigo caso exista
+            container.innerHTML = ""; 
+
+            container.innerHTML = jogos.map(jogo => `
+                <div class="game-card">
+                    ${jogo.novo ? '<span class="badge-novo">Novo</span>' : ''}
+                    <img src="${jogo.imagem}" alt="${jogo.nome}">
+                    <p class="game-title">${jogo.nome} - 25 Dígitos</p>
+                    <p class="game-price">${jogo.preco}</p>
+                    <div class="card-buttons">
+                        <a href="comprar.php?id=${jogo.id}" class="btn-primary">Comprar</a>
+                        <a href="jogo.html?id=${jogo.id}" class="btn-secondary">Detalhes</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Executa assim que a página carrega
+        document.addEventListener("DOMContentLoaded", renderizarCatalogo);
+    </script>
 </body>
 </html>
