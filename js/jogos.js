@@ -260,16 +260,38 @@ const jogos = [
       "Fotos/Jogos/imagem-farcry6-3.jpg",
     ]
      },
-  { nome: "Far Cry 10",
-      preco: "R$ 99.90",
-      novo: false,
-      imagem: "Fotos/Jogos/Minecraft.jpg",
-       trailer: "https://www.youtube.com/embed/AKXiKBnzpBQ",
+  { 
+    id: "far-cry-10", // ADICIONE ISSO
+    nome: "Far Cry 10",
+    preco: "R$ 99.90",
+    novo: false,
+    imagem: "Fotos/Jogos/Minecraft.jpg",
+    trailer: "https://www.youtube.com/embed/AKXiKBnzpBQ",
     imagens: [
       "Fotos/Jogos/Elden Ring.jpg",
       "Fotos/Jogos/Elden Ring 2.jpg",
       "Fotos/Jogos/Elden Ring 3.jpg"
     ]
-     }
+  }
 ];
 
+function renderizarCatalogoCompleto() {
+    const gridGeral = document.getElementById('grid-todos-jogos'); // Verifique se o ID no seu HTML é este
+    if (!gridGeral) return;
+
+    gridGeral.innerHTML = jogos.map(jogo => `
+        <div class="game-card">
+            ${jogo.novo ? '<span class="badge-novo">Novo</span>' : ''}
+            <img src="${jogo.imagem}" alt="${jogo.nome}">
+            <p class="game-title">${jogo.nome} - 25 Dígitos</p>
+            <p class="game-price">${jogo.preco}</p>
+            <div class="card-buttons">
+                <a href="comprar.php?id=${jogo.id}" class="btn-primary">Comprar</a>
+                <a href="jogo.html?id=${jogo.id}" class="btn-secondary">Detalhes</a>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Garante que a função rode ao abrir a página
+window.addEventListener('DOMContentLoaded', renderizarCatalogoCompleto);
