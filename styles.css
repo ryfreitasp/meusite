@@ -1,0 +1,825 @@
+/* Paleta de Cores */
+:root {
+    --color-primary: #5a00a0; /* Roxo principal para destaque/botões */
+    --color-secondary: #4a008a; /* Roxo mais escuro para hover/detalhes */
+    --color-background: #111111; /* Preto para o fundo geral */
+    --color-text-light: #ffffff; /* Branco para texto principal */
+    --color-text-dim: #cccccc; /* Cinza claro para texto secundário */
+}
+
+/* Reset Básico e Configuração da Fonte */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Cabeçalho --- */
+
+.main-header {
+    background-color: #000000; /* Preto mais intenso para o cabeçalho */
+    padding: 15px 0;
+    border-bottom: 3px solid var(--color-primary);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Permite que os itens quebrem a linha em telas menores */
+}
+
+/* Navegação */
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+}
+
+.main-nav a {
+    color: var(--color-text-dim);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 5px 0;
+    transition: color 0.3s, border-bottom 0.3s;
+}
+
+.main-nav a:hover {
+    color: var(--color-text-light);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+/* Busca e Conta */
+.search-and-account {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.search-and-account input[type="search"] {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #333;
+    color: var(--color-text-light);
+    width: 200px;
+}
+
+.account-btn {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.account-btn:hover {
+    background-color: var(--color-secondary);
+}
+
+
+/* --- Seção de Destaque (Hero) --- */
+
+.hero-section {
+    /* SUBSTITUA O NOME DO ARQUIVO AQUI:
+       Certifique-se de que 'xbox_banner.jpg' seja o nome exato da sua imagem.
+    */
+    background: url('Fotos/Teste\ 2.jpg') no-repeat center center/cover; 
+    
+    background-color: #222; /* Cor de fallback */
+    text-align: center;
+    padding: 100px 20px;
+    margin-bottom: 40px;
+    /* Efeito de sobreposição escura para destacar o texto */
+    position: relative;
+    z-index: 1;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Sombra escura sobre a imagem */
+    z-index: -1;
+}
+
+.hero-content h2 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px var(--color-primary);
+}
+
+.hero-content p {
+    font-size: 1.2em;
+    margin-bottom: 25px;
+}
+
+/* Botões */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+    text-decoration: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
+    border: 2px solid var(--color-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-secondary);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    display: block; /* Ocupa a largura total do card */
+    background-color: #333;
+    color: var(--color-text-light);
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    text-align: center;
+    font-size: 0.9em;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary);
+}
+
+
+/* --- Seção de Benefícios --- */
+
+.benefits-section {
+    padding: 20px 0;
+    background-color: #0d0d0d;
+    margin-bottom: 40px;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+
+.benefits-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 20px;
+}
+
+.benefit-item {
+    flex: 1 1 300px; /* Garante que o item ocupe pelo menos 300px, quebrando se necessário */
+    padding: 10px;
+}
+
+.benefit-item .icon {
+    font-size: 2.5em;
+    display: block;
+    margin-bottom: 5px;
+    color: var(--color-primary);
+}
+
+.benefit-item p {
+    font-size: 0.9em;
+    color: var(--color-text-dim);
+}
+
+.benefit-item strong {
+    color: var(--color-text-light);
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* --- Seções de Jogos (Lançamentos e Mais Vendidos) --- */
+
+.games-section {
+    padding: 20px 0 40px;
+}
+
+.games-section h3 {
+    font-size: 2em;
+    margin-bottom: 25px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid var(--color-primary);
+    display: inline-block; /* Para que a borda só pegue o texto */
+}
+
+.game-list {
+    display: grid;
+    /* Layout com 4 colunas em telas maiores, usando Grid */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 30px;
+}
+
+.game-card {
+    background-color: #222;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid #333;
+}
+
+.game-card:hover {
+    transform: translateY(-10px) scale(1.05); /* Sobe um pouco e aumenta 5% */
+    box-shadow: 0 0 20px 5px rgba(90, 0, 160, 0.6), 0 0 40px 10px rgba(90, 0, 160, 0.3); 
+    border-color: var(--color-primary);
+    z-index: 10; /* Garante que o card que cresceu fique por cima dos outros */
+    cursor: pointer;
+}
+
+.game-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    aspect-ratio: 3 / 4; /* Proporção de capa de jogo */
+    object-fit: cover;
+}
+
+.game-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+    height: 3em; /* Altura fixa para títulos de duas linhas */
+    overflow: hidden;
+    color: var(--color-text-light);
+}
+
+.game-price {
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-top: 5px;
+}
+
+
+/* --- Rodapé --- */
+
+.main-footer {
+    background-color: #000000;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 3px solid var(--color-primary);
+    margin-top: 40px;
+}
+
+.main-footer p {
+    color: var(--color-text-dim);
+    font-size: 0.9em;
+}
+
+
+/* --- Media Queries para Responsividade (Telas Menores) --- */
+
+@media (max-width: 900px) {
+    .main-nav ul {
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    .main-nav ul {
+        justify-content: center;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .search-and-account {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .search-and-account input[type="search"] {
+        width: 60%;
+    }
+    
+    .hero-content h2 {
+        font-size: 2.5em;
+    }
+
+    /* Em telas muito pequenas, forçar uma coluna para benefícios */
+    .benefits-grid {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 500px) {
+    .game-list {
+        /* Garante pelo menos duas colunas em dispositivos móveis */
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    }
+    
+    .search-and-account input[type="search"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Define o tamanho da imagem do logo */
+/* --- Estilo para o Logo de Imagem (logo-img) --- */
+
+.logo-img {
+    height: 80px; /* NOVO TAMANHO */
+    width: 80px; /* NOVO TAMANHO */
+    border-radius: 50%; 
+    display: block;
+    object-fit: cover; 
+    border: 3px solid var(--color-primary); /* Aumentei a borda para acompanhar */
+}
+
+/* Garante que o link não adicione nenhum estilo indesejado */
+.logo a {
+    text-decoration: none;
+    display: block;
+    line-height: 0; 
+}
+
+/* Ajuste o h1 original (que não existe mais) para não interferir */
+.logo h1 { /* Este bloco pode ser removido ou alterado para 1em de font-size, caso queira usar texto no futuro */
+    font-size: 1em; 
+}
+
+/* Cabeçalho da Seção (Título + Botão) */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.section-header h3 {
+    border-bottom: none; /* Removemos a borda original para usar a do pai */
+    margin-bottom: 0;
+}
+
+.btn-view-more {
+    color: var(--color-text-dim);
+    text-decoration: none;
+    font-size: 0.9em;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.btn-view-more:hover {
+    color: var(--color-primary);
+}
+
+/* Estrutura do Carrossel */
+.carousel-container {
+    overflow: hidden; /* Esconde o que sai da tela */
+    padding: 20px 0;
+}
+
+.game-list-carousel {
+    display: flex;
+    gap: 30px;
+    width: max-content; /* Faz a lista ter o tamanho real dos itens */
+    animation: scroll-left 30s linear infinite; /* Movimento lento */
+}
+
+/* Pausar ao passar o mouse */
+.game-list-carousel:hover {
+    animation-play-state: paused;
+}
+
+/* Animação do movimento */
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%); /* Ajuste conforme a quantidade de itens */
+    }
+}
+
+/* Ajuste no card para o carrossel */
+.game-list-carousel .game-card {
+    min-width: 220px; /* Largura mínima de cada card */
+    max-width: 250px; /* Impede que ele cresça demais */
+    flex-shrink: 0;   /* Impede que o flexbox esmague os cards */
+}
+
+.game-list-carousel .game-card img {
+    width: 100%;
+    height: 320px;     /* Altura fixa para manter o padrão */
+    object-fit: cover; /* Corta a imagem sem distorcer se as capas tiverem tamanhos diferentes */
+}
+
+/* Estilos para a Página de Catálogo */
+
+.catalog-header {
+    margin: 40px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.catalog-header h1 {
+    font-size: 2.2em;
+    border-left: 5px solid var(--color-primary);
+    padding-left: 15px;
+}
+
+.filter-bar {
+    display: flex;
+    gap: 15px;
+}
+
+.filter-bar select {
+    background-color: #222;
+    color: white;
+    border: 1px solid #444;
+    padding: 10px 15px;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Grid de Jogos */
+.catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 30px;
+}
+
+/* Badge (Opcional: etiqueta de 'Novo' ou 'Promoção') */
+.game-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.7em;
+    font-weight: bold;
+    z-index: 2;
+}
+/* --- Paginação --- */
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0;
+}
+
+.pagination {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.page-number, .page-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: #222;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 1px solid #333;
+}
+
+/* Página Atual (Roxa) */
+.page-number.active {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 15px rgba(90, 0, 160, 0.5);
+}
+
+/* Efeito ao passar o mouse */
+.page-number:hover:not(.active), .page-arrow:hover:not(.disabled) {
+    background-color: #333;
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+/* Seta desativada */
+.page-arrow.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.game-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ===== PÁGINA DO JOGO (CORRIGIDA PARA PRETO E ROXO) ===== */
+
+
+
+/* LADO ESQUERDO */
+.jogo-media iframe {
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #333; /* Adicionado um detalhe de borda sutil */
+}
+
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas iguais */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.galeria img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #333;
+    transition: transform 0.3s;
+}
+
+.galeria img:hover {
+    transform: scale(1.05);
+    border-color: var(--color-primary);
+}
+
+/* LADO DIREITO */
+.jogo-info {
+  background: #1a1a1a; /* Um pouco mais claro que o fundo para dar profundidade */
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  border: 1px solid #333;
+}
+
+.jogo-info h1 {
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+.jogo-info .preco {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--color-primary); /* Preço agora é Roxo */
+  margin-bottom: 20px;
+}
+
+.btn-comprar {
+  width: 100%;
+  text-align: center;
+  padding: 14px;
+  border-radius: 10px;
+  background: #6a00b6;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.btn-comprar:hover {
+  background: #7c1fd1;
+}
+
+.info-box {
+  width: 100%;
+  background: #0f0f0f;
+  border-radius: 12px;
+  padding: 16px;
+  border-left: 4px solid #6a00b6;
+}
+
+.info-box h3 {
+  margin-bottom: 10px;
+  color: var(--color-primary); /* Título da info box em roxo */
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+    .jogo-layout {
+        grid-template-columns: 1fr; /* Empilha no celular */
+    }
+}
+
+.image-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  align-items: center;
+  justify-content: center;
+}
+
+.image-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+}
+
+.close-modal {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.game-description {
+  margin-top: 30px;
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.game-description h2 {
+  color: #a855f7;
+  margin-bottom: 10px;
+}
+
+.game-description p {
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.game-details {
+  margin-top: 15px;
+  list-style: none;
+  padding: 0;
+}
+
+.game-details li {
+  margin-bottom: 6px;
+  color: #bbb;
+}
+
+
+.jogo-media {
+  flex: 2;
+}
+
+/* --- UNIFICANDO O LAYOUT DA PÁGINA DO JOGO --- */
+.jogo-layout {
+    display: grid;
+    /* 70% para o trailer e 30% para o card de compra */
+    grid-template-columns: 7fr 3fr; 
+    gap: 30px;
+    width: 100%;
+    margin-top: 30px;
+    align-items: start; /* Alinha o card no topo */
+}
+/* FIX DO TRAILER: Mantém a proporção de cinema (16:9) */
+#jogo-trailer {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9; /* Isso impede que ele fique 'esmagado' */
+    border-radius: 12px;
+    border: 1px solid #333;
+    display: block;
+}
+/* FIX DO CARD DE COMPRA: Ocupa todo o espaço da direita */
+.jogo-info {
+    width: 100%; 
+    background: #1a1a1a;
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid #333;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Grid de Jogos Aleatórios (Rodapé) */
+.jogos-relacionados {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid #333;
+}
+
+.jogos-relacionados h2 {
+    margin-bottom: 25px;
+    color: var(--color-primary);
+}
+
+.jogos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* Responsividade para Celulares */
+@media (max-width: 900px) {
+    .jogo-layout {
+        grid-template-columns: 1fr; /* Empilha um em cima do outro no celular */
+    }
+}
+.account-icon {
+    font-size: 22px;
+    background: #6a00ff;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.account-icon:hover {
+    background: #4c00b8;
+}
+.user-area {
+    position: relative;
+}
+
+.user-btn {
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.user-dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 35px;
+    background: #fff;
+    border-radius: 10px;
+    width: 180px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.15);
+    padding: 10px;
+    z-index: 999;
+}
+
+.dropdown-menu a,
+.dropdown-menu span {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #111;
+    font-size: 14px;
+}
+
+.dropdown-menu a:hover {
+    background: #f3f4f6;
+    border-radius: 6px;
+}
+
+.user-name {
+    font-weight: bold;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.logout {
+    color: #ef4444;
+}

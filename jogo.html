@@ -1,0 +1,126 @@
+<?php
+session_start();
+?>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nito Play - Jogos Digitais Xbox</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="main-header">
+    <div class="container header-content"> <div class="logo">
+            <a href="index.php"> 
+                <img src="Fotos/Logo NIto Play.png" alt="Logo Nito Play - Home" class="logo-img"> 
+            </a>
+        </div>
+        
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="#">Xbox One</a></li>
+                <li><a href="#">Xbox Series X|S</a></li>
+                <li><a href="#">Minha Conta</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+
+        <div class="search-and-account">
+
+<?php if (isset($_SESSION['usuario_id'])): ?>
+    <!-- USUÁRIO LOGADO -->
+    <a href="conta.php" class="account-icon" title="Minha conta">
+        👤
+    </a>
+<?php else: ?>
+    <!-- USUÁRIO NÃO LOGADO -->
+<?php endif; ?>
+
+</div>
+    </div> </header>
+
+<main class="container jogo-page">
+
+  <div class="jogo-layout">
+
+    <!-- LADO ESQUERDO -->
+    <section class="jogo-media">
+
+      <!-- TRAILER -->
+      <iframe
+  id="jogo-trailer"
+  src=""
+  frameborder="0"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
+
+      <!-- GALERIA -->
+      <div class="galeria">
+        <img id="img1" class="game-thumbnail">
+        <img id="img2" class="game-thumbnail">
+        <img id="img3" class="game-thumbnail">
+      </div>
+
+      <!-- DESCRIÇÃO (AGORA NO LUGAR CERTO) -->
+      <div class="descricao-jogo" style="margin-top: 30px;">
+        <h2>Descrição do jogo</h2>
+        <ul>
+          <li>🎮 Plataforma: Xbox One / Xbox Series X|S</li>
+          <li>⚡ Entrega digital imediata</li>
+          <li>🔑 Código original de 25 dígitos</li>
+          <li>✅ Jogo ativável em conta brasileira</li>
+        </ul>
+      </div>
+
+    </section>
+
+    <!-- LADO DIREITO -->
+    <aside class="jogo-info">
+      <h1 id="jogo-nome"></h1>
+      <p class="preco" id="jogo-preco"></p>
+
+      <a href="comprar.php?jogo=halo&preco=99.90" class="btn-comprar">Comprar agora</a>
+
+      <div class="info-box">
+        <h3>Como funciona entrega de 25 dígitos?</h3>
+        <p>
+          Após a compra, você receberá um código de 25 dígitos
+          para resgatar diretamente na sua conta Xbox.
+        </p>
+      </div>
+    </aside>
+
+  </div>
+
+</main>
+<section class="jogos-relacionados container">
+  <h2>Você também pode gostar</h2>
+
+  <div class="jogos-grid" id="jogos-random">
+    <!-- JS vai preencher -->
+  </div>
+</section>
+
+<!-- Modal de Imagem -->
+<div id="imageModal" class="image-modal">
+  <span class="close-modal">&times;</span>
+  <img class="modal-content" id="modalImage">
+</div>
+
+<script src="js/jogos.js"></script>
+<script src="js/jogo.js"></script>
+
+<footer class="main-footer">
+  <div class="container">
+    <p>&copy; 2025 Nito Play. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+</body>
+</html>

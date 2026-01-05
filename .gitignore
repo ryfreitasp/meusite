@@ -1,0 +1,4 @@
+/vendor/
+config.php
+.vscode/
+php_errors.log
