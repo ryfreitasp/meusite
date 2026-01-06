@@ -8,6 +8,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nito Play - Jogos Digitais Xbox</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="js/carrinho.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -41,7 +42,28 @@ session_start();
 <?php endif; ?>
 
 </div>
-    </div> </header>
+    </div> 
+  <div id="carrinho-overlay" onclick="toggleCarrinho()"></div>
+
+<aside id="carrinho-lateral" class="carrinho-sidebar">
+    <div class="carrinho-header">
+        <h2 style="color: #fff; margin: 0;"><i class="fas fa-shopping-cart"></i> Meu Carrinho</h2>
+        <button onclick="toggleCarrinho()" class="btn-fechar-carrinho">&times;</button>
+    </div>
+
+    <div id="itens-do-carrinho" class="carrinho-itens">
+        <p style="color: #888; text-align: center;">O seu carrinho está vazio.</p>
+    </div>
+
+    <div class="carrinho-footer">
+        <div class="carrinho-total">
+            <span>Total:</span>
+            <span id="valor-total-carrinho">R$ 0,00</span>
+        </div>
+        <button onclick="irParaCheckout()" class="btn-finalizar">FINALIZAR COMPRA</button>
+    </div>
+</aside>
+  </header>
 
 <main class="container jogo-page">
 
@@ -85,7 +107,7 @@ session_start();
       <h1 id="jogo-nome"></h1>
       <p class="preco" id="jogo-preco"></p>
 
-      <a href="comprar.php?jogo=halo&preco=99.90" class="btn-comprar">Comprar agora</a>
+      <a href="comprar.php?jogo=halo&preco=99.90" class="btn-comprar">Adicionar no carrinho</a>
 
       <div class="info-box">
         <h3>Como funciona entrega de 25 dígitos?</h3>

@@ -12,17 +12,16 @@ if (!isset($_SESSION['usuario_id'])) {
 <head>
 <meta charset="UTF-8">
 <title>Minha Conta | Nito Play</title>
-
 <style>
 body {
-    background: #f5f6fa;
+    background: #4a008a;
     font-family: Arial, sans-serif;
 }
 
 .container {
     max-width: 900px;
     margin: 60px auto;
-    background: #fff;
+    background: #ffffffff;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,.08);
@@ -42,7 +41,7 @@ h2 {
 }
 
 .section h3 {
-    color: #7c3aed;
+    color: #ffffffff;
     margin-bottom: 15px;
 }
 

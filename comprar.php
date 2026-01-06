@@ -1,77 +1,72 @@
 <?php
-// 1. Configurações Iniciais e Conexão
-include "config.php"; // Verifique se o config.php define BASE_URL e a conexão $conn
+include "config.php"; 
 require_once 'vendor/autoload.php';
 
 use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\MercadoPagoConfig;
 
-// 2. Proteção: Verifica se o usuário está logado
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: login.php");
     exit;
 }
 
-// 3. Captura o ID do jogo e limpa o texto (Garante letras minúsculas e sem espaços)
 $jogo_id = isset($_GET['id']) ? strtolower(trim($_GET['id'])) : '';
+if (empty($jogo_id)) { die("Erro: Nenhum jogo selecionado."); }
 
-if (empty($jogo_id)) {
-    die("Erro: Nenhum jogo foi selecionado.");
-}
-
-// 4. Busca os dados reais no Banco de Dados (Tabela: produtos / Coluna: slug)
 $stmt = $conn->prepare("SELECT nome, preco FROM produtos WHERE slug = ?");
 $stmt->bind_param("s", $jogo_id);
 $stmt->execute();
-$res = $stmt->get_result();
-$jogo = $res->fetch_assoc();
+$jogo = $stmt->get_result()->fetch_assoc();
 
-// Se não encontrar o slug no banco, para a execução e avisa qual ID faltou
-if (!$jogo) {
-    die("Erro: O jogo com o identificador '$jogo_id' não foi encontrado no banco de dados.");
-}
+if (!$jogo) { die("Erro: Jogo não encontrado."); }
 
-$nomeProduto = $jogo['nome'];
+$nomeProduto = (string)$jogo['nome'];
 $valorProduto = (float)$jogo['preco'];
 
-// 5. Gera o Pedido no Banco de Dados para controle interno
-$numeroPedido = 'NP-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -4));
+// 1. REGISTRO DO PEDIDO NO BANCO
+$numeroPedido = 'NP-' . time();
 $usuarioId = $_SESSION['usuario_id'];
-$emailUser = $_SESSION['usuario_email'] ?? 'email@naoinformado.com';
+$emailUser = $_SESSION['usuario_email'] ?? 'comprador_teste@email.com';
 
 $sqlPedido = "INSERT INTO pedidos (numero_pedido, usuario_id, email, produto, valor, status) VALUES (?, ?, ?, ?, ?, 'aguardando_pagamento')";
 $stmtPedido = $conn->prepare($sqlPedido);
 $stmtPedido->bind_param("sissd", $numeroPedido, $usuarioId, $emailUser, $nomeProduto, $valorProduto);
 $stmtPedido->execute();
 
-// 6. Configuração do Mercado Pago (Checkout Pro)
-// Substitua pelo seu Access Token de PRODUÇÃO se for colocar o site no ar
-MercadoPagoConfig::setAccessToken("SAPP_USR-363557c5-5017-4a86-9dc9-74a2f615763f");
+// 2. CONFIGURAÇÃO MERCADO PAGO
+// Usei exatamente o token que você revelou na imagem image_e0469d.png
+MercadoPagoConfig::setAccessToken("APP_USR-4798540745051882-010421-4f17c214a66be3478531e2b787c2e496-3110331799");
 
 $client = new PreferenceClient();
 
 try {
+    // Criamos a preferência de forma direta
     $preference = $client->create([
         "items" => [
             [
-                "title" => $nomeProduto . " - 25 Dígitos",
+                "title" => $nomeProduto,
                 "quantity" => 1,
-                "unit_price" => $valorProduto
+                "unit_price" => $valorProduto,
+                "currency_id" => "BRL"
             ]
         ],
-        "external_reference" => $numeroPedido,
+        "external_reference" => (string)$numeroPedido,
         "back_urls" => [
-            "success" => "http://localhost/sucesso.php", // Ajuste se não for localhost
-            "failure" => "http://localhost/erro.php",
-            "pending" => "http://localhost/pendente.php"
+            "success" => "http://localhost/meusite/sucesso.php",
+            "failure" => "http://localhost/meusite/erro.php",
+            "pending" => "http://localhost/meusite/pendente.php"
         ],
-        "auto_return" => "approved",
+        "auto_return" => "approved"
     ]);
 
-    // 7. Redireciona o usuário para a página de pagamento do Mercado Pago
-    header("Location: " . $preference->init_point);
-    exit;
+    // REDIRECIONAMENTO COM JAVASCRIPT (Mais estável para localhost)
+    if ($preference->init_point) {
+        echo "<script>window.location.href='" . $preference->init_point . "';</script>";
+        exit;
+    }
 
 } catch (Exception $e) {
-    die("Erro ao gerar pagamento: " . $e->getMessage());
+    echo "<h3>Ocorreu um problema na comunicação:</h3>";
+    echo "O Mercado Pago recusou a conexão vinda do seu computador local.<br>";
+    echo "Motivo técnico: " . $e->getMessage();
 }

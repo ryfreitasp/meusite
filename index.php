@@ -8,6 +8,7 @@ include "config.php";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nito Play - Jogos Digitais Xbox</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="js/carrinho.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -22,9 +23,8 @@ include "config.php";
         <nav class="main-nav">
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="todos-os-jogos.html">Xbox One</a></li>
-                <li><a href="todos-os-jogos.html">Xbox Series X|S</a></li>
-                <li><a href="#">Minha Conta</a></li>
+                <li><a href="todos-os-jogos.php">Xbox One</a></li>
+                <li><a href="todos-os-jogos.php">Xbox Series X|S</a></li>
                 <li><a href="#">Contato</a></li>
             </ul>
         </nav>
@@ -63,13 +63,34 @@ document.addEventListener("click", function (e) {
 </script>
 
 </div>
-    </div> </header>
+    </div>
+<div id="carrinho-overlay" onclick="toggleCarrinho()"></div>
+
+<aside id="carrinho-lateral" class="carrinho-sidebar">
+    <div class="carrinho-header">
+        <h2 style="color: #fff; margin: 0;"><i class="fas fa-shopping-cart"></i> Meu Carrinho</h2>
+        <button onclick="toggleCarrinho()" class="btn-fechar-carrinho">&times;</button>
+    </div>
+
+    <div id="itens-do-carrinho" class="carrinho-itens">
+        <p style="color: #888; text-align: center;">O seu carrinho está vazio.</p>
+    </div>
+
+    <div class="carrinho-footer">
+        <div class="carrinho-total">
+            <span>Total:</span>
+            <span id="valor-total-carrinho">R$ 0,00</span>
+        </div>
+        <button onclick="irParaCheckout()" class="btn-finalizar">FINALIZAR COMPRA</button>
+    </div>
+</aside>
+</header>
 
     <section class="hero-section">
         <div class="container hero-content">
             <h2>O Melhor do Xbox Digital</h2>
             <p>Seu pedido entregue automaticamente e com segurança em minutos!</p>
-            <a href="todos-os-jogos.html" class="btn-primary">Ver Lançamentos</a>
+            <a href="todos-os-jogos.php" class="btn-primary">Ver Lançamentos</a>
         </div>
     </section>
 
@@ -97,7 +118,7 @@ document.addEventListener("click", function (e) {
     <div class="container">
         <div class="section-header">
             <h3>🎮 Lançamentos</h3>
-            <a href="todos-os-jogos.html" class="btn-view-more">Ver mais</a>
+            <a href="todos-os-jogos.php" class="btn-view-more">Ver mais</a>
         </div>
 
         <div class="carousel-container">

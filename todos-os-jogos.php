@@ -9,6 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todos os Jogos - Nito Play</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="js/carrinho.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body data-pagina="1">
@@ -28,6 +29,26 @@ session_start();
                 </ul>
             </nav>
         </div>
+        <div id="carrinho-overlay" onclick="toggleCarrinho()"></div>
+
+<aside id="carrinho-lateral" class="carrinho-sidebar">
+    <div class="carrinho-header">
+        <h2 style="color: #fff; margin: 0;"><i class="fas fa-shopping-cart"></i> Meu Carrinho</h2>
+        <button onclick="toggleCarrinho()" class="btn-fechar-carrinho">&times;</button>
+    </div>
+
+    <div id="itens-do-carrinho" class="carrinho-itens">
+        <p style="color: #888; text-align: center;">O seu carrinho está vazio.</p>
+    </div>
+
+    <div class="carrinho-footer">
+        <div class="carrinho-total">
+            <span>Total:</span>
+            <span id="valor-total-carrinho">R$ 0,00</span>
+        </div>
+        <button onclick="irParaCheckout()" class="btn-finalizar">FINALIZAR COMPRA</button>
+    </div>
+</aside>
     </header>
 
     <main class="container">
@@ -84,7 +105,9 @@ session_start();
                     <p class="game-title">${jogo.nome} - 25 Dígitos</p>
                     <p class="game-price">${jogo.preco}</p>
                     <div class="card-buttons">
-                        <a href="comprar.php?id=${jogo.id}" class="btn-primary">Comprar</a>
+                        <button onclick="adicionarAoCarrinho(<?php echo $jogo['id']; ?>)" class="btn-comprar">
+    Comprar
+</button>
                         <a href="jogo.html?id=${jogo.id}" class="btn-secondary">Detalhes</a>
                     </div>
                 </div>
