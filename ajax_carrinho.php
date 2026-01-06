@@ -1,6 +1,10 @@
 <?php
 include "config.php";
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 $usuario_id = $_SESSION['usuario_id'] ?? 0;
 $acao = $_REQUEST['acao'] ?? '';
 
@@ -12,36 +16,38 @@ if (!$usuario_id) {
 if ($acao == 'adicionar') {
     $produto_id = (int)$_POST['produto_id'];
     
-    // Verifica se já existe no carrinho para apenas aumentar a quantidade ou só inserir
+    // Na sua tabela é 'produto_id', no código anterior estava diferente
     $stmt = $conn->prepare("INSERT INTO carrinho (usuario_id, produto_id, quantidade) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE quantidade = quantidade + 1");
     $stmt->bind_param("ii", $usuario_id, $produto_id);
     
     if ($stmt->execute()) {
         echo json_encode(['sucesso' => true]);
+    } else {
+        echo json_encode(['sucesso' => false, 'mensagem' => $conn->error]);
     }
     exit;
 }
 
 if ($acao == 'listar') {
-    // Busca os jogos que estão no carrinho do usuário
-    $sql = "SELECT p.nome, p.preco, p.imagem, c.quantidade FROM carrinho c 
+    // AJUSTE: Troquei 'p.imagem' por 'p.capa' que é o nome real na sua tabela do GitHub
+    $sql = "SELECT p.nome, p.preco, p.capa, c.quantidade FROM carrinho c 
             JOIN produtos p ON c.produto_id = p.id 
             WHERE c.usuario_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $usuario_id);
-    $stmt->execute();v
+    $stmt->execute();
     $res = $stmt->get_result();
 
     if ($res->num_rows == 0) {
-        echo "<p style='color:#888; text-align:center;'>Carrinho vazio</p>";
+        echo "<p style='color:#888; text-align:center; padding:20px;'>Carrinho vazio</p>";
     } else {
         while ($item = $res->fetch_assoc()) {
             echo "
-            <div class='item-carrinho' style='display:flex; align-items:center; gap:10px; margin-bottom:10px; color:#fff;'>
-                <img src='img/{$item['imagem']}' style='width:50px;'>
-                <div>
-                    <div style='font-size:14px;'>{$item['nome']}</div>
-                    <div style='color:#8a2be2;'>R$ " . number_format($item['preco'], 2, ',', '.') . "</div>
+            <div class='item-carrinho' style='display:flex; align-items:center; gap:10px; margin-bottom:15px; background:#1a1a1a; padding:10px; border-radius:5px;'>
+                <img src='img/{$item['capa']}' style='width:50px; height:60px; object-fit:cover; border-radius:4px;'>
+                <div style='flex-grow:1;'>
+                    <div style='font-size:14px; color:#fff; font-weight:bold;'>{$item['nome']}</div>
+                    <div style='color:#8a2be2; font-size:13px;'>R$ " . number_format($item['preco'], 2, ',', '.') . " <span style='color:#666;'>x{$item['quantidade']}</span></div>
                 </div>
             </div>";
         }

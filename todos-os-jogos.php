@@ -105,10 +105,8 @@ session_start();
                     <p class="game-title">${jogo.nome} - 25 Dígitos</p>
                     <p class="game-price">${jogo.preco}</p>
                     <div class="card-buttons">
-                        <button onclick="adicionarAoCarrinho(<?php echo $jogo['id']; ?>)" class="btn-comprar">
-    Comprar
-</button>
-                        <a href="jogo.html?id=${jogo.id}" class="btn-secondary">Detalhes</a>
+                        <button onclick="adicionarAoCarrinho(<?php echo $jogo['id']; ?>)" class="btn-comprar">Comprar</button>
+                        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
                     </div>
                 </div>
             `).join('');
@@ -117,5 +115,7 @@ session_start();
         // Executa assim que a página carrega
         document.addEventListener("DOMContentLoaded", renderizarCatalogo);
     </script>
+    <?php include "carrinho-template.php"; ?> 
+<script src="js/carrinho.js"></script>
 </body>
 </html>

@@ -45,6 +45,10 @@ include "config.php";
             <a href="logout.php" class="logout">Sair</a>
         </div>
     </div>
+    <div class="cart-icon" onclick="toggleCarrinho()" style="cursor:pointer;">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="cart-count">0</span>
+</div>
 
 <?php endif; ?>
 </div>
@@ -261,6 +265,7 @@ document.addEventListener("click", function (e) {
             <p>&copy; 2025 Nito Play. Todos os direitos reservados.</p>
         </div>
     </footer>
-    
+    <?php include "carrinho-template.php"; ?> 
+<script src="js/carrinho.js"></script>
 </body>
 </html>

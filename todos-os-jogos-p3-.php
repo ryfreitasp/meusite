@@ -89,5 +89,7 @@ session_start();
 
 <script src="js/jogos.js"></script>
 <script src="js/catalogo.js"></script>
+<?php include "carrinho-template.php"; ?> 
+<script src="js/carrinho.js"></script>
 </body>
 </html>

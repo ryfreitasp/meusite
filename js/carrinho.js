@@ -14,20 +14,23 @@ function toggleCarrinho() {
 
 // Função para adicionar jogo ao carrinho via AJAX
 function adicionarAoCarrinho(produtoId) {
-    // Usamos fetch para falar com o PHP sem dar refresh
+    const formData = new FormData();
+    formData.append('acao', 'adicionar');
+    formData.append('produto_id', produtoId);
+
     fetch('ajax_carrinho.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'acao=adicionar&produto_id=' + produtoId
+        body: formData
     })
     .then(response => response.json())
     .then(data => {
         if (data.sucesso) {
-            toggleCarrinho(); // Abre a aba para mostrar o jogo adicionado
+            toggleCarrinho(); // Abre a aba lateral
         } else {
-            alert('Erro: ' + data.mensagem);
+            alert(data.mensagem);
         }
-    });
+    })
+    .catch(error => console.error('Erro:', error));
 }
 
 // Função para buscar os itens do banco e colocar no HTML da aba

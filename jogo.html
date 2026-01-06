@@ -107,7 +107,9 @@ session_start();
       <h1 id="jogo-nome"></h1>
       <p class="preco" id="jogo-preco"></p>
 
-      <a href="comprar.php?jogo=halo&preco=99.90" class="btn-comprar">Adicionar no carrinho</a>
+      <a href="javascript:void(0)" onclick="adicionarAoCarrinho(<?php echo $jogo['id']; ?>); return false;" class="btn">
+    Comprar
+</a>
 
       <div class="info-box">
         <h3>Como funciona entrega de 25 dígitos?</h3>
