@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   <img src="${jogo.imagem}" alt="${jogo.nome}">
   <p class="game-title">${jogo.nome} - 25 Dígitos</p>
   <p class="game-price">${jogo.preco}</p>
-  <a href="jogo.html?id=${jogo.id}" class="btn-secondary">Comprar</a>
+  <a href="href="produto.php?id=<?php echo $jogo['slug']; ?>" class="btn-secondary">Comprar</a>
 `;
 
     container.appendChild(card);

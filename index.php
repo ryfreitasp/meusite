@@ -10,6 +10,7 @@ include "config.php";
     <link rel="stylesheet" href="styles.css">
     <script src="js/carrinho.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
@@ -28,7 +29,10 @@ include "config.php";
                 <li><a href="#">Contato</a></li>
             </ul>
         </nav>
-
+<div class="cart-icon" onclick="toggleCarrinho()" style="cursor:pointer; position: relative;">
+    <i class="fas fa-shopping-cart" style="color: #8a2be2; font-size: 24px;"></i>
+    <span class="badge-carrinho" style="position: absolute; top: -10px; right: -10px; background: #8a2be2; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;">0</span>
+</div>
         <div class="user-area">
 <?php if (!isset($_SESSION['usuario_id'])): ?>
 
@@ -132,90 +136,90 @@ document.addEventListener("click", function (e) {
         <img src="Fotos/Jogos/fc 26.jpg" alt="Capa FC 26">
         <p class="game-title">FC 26 Xbox One/Series</p>
         <p class="game-price">R$ 199,90</p>
-        <a href="jogo.html?id=fc-26" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
 
     <div class="game-card">
         <img src="Fotos/Jogos/forza horizon 5.jpg" alt="Capa Forza 5">
         <p class="game-title">Forza Horizon 5 - 25 Dígitos</p>
         <p class="game-price">R$ 159,90</p>
-        <a href="jogo.html?id=forza-horizon-5" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
 
     <div class="game-card">
         <img src="Fotos/Jogos/battlefield 6.jpg" alt="Capa Battlefield 6">
         <p class="game-title">Battlefield 6 - 25 Dígitos</p>
         <p class="game-price">R$ 99,90</p>
-        <a href="jogo.html?id=battlefield-6" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
 
     <div class="game-card">
         <img src="Fotos/Jogos/call of duty black ops 7.jpg" alt="Capa COD">
         <p class="game-title">COD Black Ops 7 - 25 Dígitos</p>
         <p class="game-price">R$ 79,90</p>
-        <a href="jogo.html?id=call-of-duty-black-ops-7" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
 
     <div class="game-card">
         <img src="Fotos/Jogos/cyberpunck-2077.jpg" alt="Jogo 5">
         <p class="game-title">NOME DO JOGO 5</p>
         <p class="game-price">R$ 00,00</p>
-        <a href="jogo.html?id=cyberpunk-2077" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
     <div class="game-card">
         <img src="Fotos/Jogos/mortal-1.jpg" alt="Jogo 6">
         <p class="game-title">NOME DO JOGO 6</p>
         <p class="game-price">R$ 00,00</p>
-        <a href="jogo.html?id=mortal-kombat-11" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
     <div class="game-card">
         <img src="Fotos/Jogos/resident evil 4 remake.jpg" alt="Jogo 7">
         <p class="game-title">NOME DO JOGO 7</p>
         <p class="game-price">R$ 00,00</p>
-        <a href="jogo.html?id=resident-evil-4-remake" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
     <div class="game-card">
         <img src="Fotos/Jogos/starfield.jpg" alt="Jogo 8">
         <p class="game-title">NOME DO JOGO 8</p>
         <p class="game-price">R$ 00,00</p>
-        <a href="jogo.html?id=starfield" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
     <div class="game-card">
         <img src="Fotos/Jogos/assassins-valhalla.jpg" alt="Jogo 9">
         <p class="game-title">NOME DO JOGO 9</p>
         <p class="game-price">R$ 00,00</p>
-        <a href="jogo.html?id=assassins-valhalla" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
     <div class="game-card">
         <img src="Fotos/Jogos/elden-ring.jpg" alt="Jogo 10">
         <p class="game-title">NOME DO JOGO 10</p>
         <p class="game-price">R$ 00,00</p>
-        <a href="jogo.html?id=elden-ring" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
 
     <div class="game-card">
         <img src="Fotos/Jogos/fc 26.jpg" alt="Capa FC 26">
         <p class="game-title">FC 26 Xbox One/Series</p>
         <p class="game-price">R$ 199,90</p>
-        <a href="jogo.html?id=fc-26" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
     <div class="game-card">
         <img src="Fotos/Jogos/forza horizon 5.jpg" alt="Capa Forza 5">
         <p class="game-title">Forza Horizon 5 - 25 Dígitos</p>
         <p class="game-price">R$ 159,90</p>
-        <a href="jogo.html?id=forza-horizon-5" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
     <div class="game-card">
         <img src="Fotos/Jogos/battlefield 6.jpg 6.jpg" alt="Capa Battlefield 6">
         <p class="game-title">Battlefield 6 - 25 Dígitos</p>
         <p class="game-price">R$ 99,90</p>
-        <a href="jogo.html?id=battlefield-6" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
     <div class="game-card">
         <img src="Fotos/Jogos/call of duty black ops 7.jpg Of Duty Black Ops 7.jpg" alt="Capa COD">
         <p class="game-title">COD Black Ops 7 - 25 Dígitos</p>
         <p class="game-price">R$ 79,90</p>
-        <a href="jogo.html?id=call-of-duty-black-ops-7" class="btn-secondary">Comprar</a>
+        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
     </div>
     <div class="game-card"> <img src="Fotos/Jogos/CAPA_PADRAO.jpg" alt="Jogo 5"> <p class="game-title">NOME DO JOGO 5</p> <p class="game-price">R$ 00,00</p> <a href="#" class="btn-secondary">Comprar</a> </div>
     <div class="game-card"> <img src="Fotos/Jogos/CAPA_PADRAO.jpg" alt="Jogo 6"> <p class="game-title">NOME DO JOGO 6</p> <p class="game-price">R$ 00,00</p> <a href="#" class="btn-secondary">Comprar</a> </div>
@@ -236,25 +240,25 @@ document.addEventListener("click", function (e) {
                     <img src="Fotos/Jogos/gta-v.jpg" alt="Capa do Jogo 5">
                     <p class="game-title">GTA v Xbox One/Series - 25 Dígitos</p>
                     <p class="game-price">R$ 49,90</p>
-                    <a href="jogo.html?id=gta-v" class="btn-secondary">Comprar</a>
+                    <a href="jogo.?id=gta-v" class="btn-secondary">Comprar</a>
                 </div>
                  <div class="game-card">
                     <img src="Fotos/Jogos/hogwarts legacy.jpg" alt="Capa do Jogo 6">
                     <p class="game-title">Hogwarts Legacy Xbox One/Series - 25 Dígitos</p>
                     <p class="game-price">R$ 39,90</p>
-                    <a href="jogo.html?id=hogwarts-legacy" class="btn-secondary">Comprar</a>
+                    <a href="href="produto.php?id=<?php echo $jogo['slug']; ?>" class="btn-secondary">Comprar</a>
                 </div>
                  <div class="game-card">
                     <img src="Fotos/Jogos/resident evil 4 remake.jpg" alt="Capa do Jogo 7">
                     <p class="game-title">Resident Evil 4 Remake Xbox One/Series - 25 Dígitos</p>
                     <p class="game-price">R$ 29,90</p>
-                    <a href="jogo.html?id=resident-evil-4-remake" class="btn-secondary">Comprar</a>
+                    <a href="href="produto.php?id=<?php echo $jogo['slug']; ?>" class="btn-secondary">Comprar</a>
                 </div>
                  <div class="game-card">
                     <img src="Fotos/Jogos/red dead 2.jpg" alt="Capa do Jogo 8">
                     <p class="game-title">Red Dead 2 Xbox One/Series - 25 Dígitos</p>
                     <p class="game-price">R$ 19,90</p>
-                    <a href="jogo.html?id=red-dead-2" class="btn-secondary">Comprar</a>
+                    <a href="produto.php?id=<?php echo $jogo['slug']; ?>" class="btn-secondary">Comprar</a>
                 </div>
             </div>
         </div>

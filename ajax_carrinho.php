@@ -30,9 +30,9 @@ if ($acao == 'adicionar') {
 
 if ($acao == 'listar') {
     // AJUSTE: Troquei 'p.imagem' por 'p.capa' que é o nome real na sua tabela do GitHub
-    $sql = "SELECT p.nome, p.preco, p.capa, c.quantidade FROM carrinho c 
-            JOIN produtos p ON c.produto_id = p.id 
-            WHERE c.usuario_id = ?";
+    $sql = "SELECT p.nome, p.preco, p.slug, c.quantidade FROM carrinho c 
+        JOIN produtos p ON c.produto_id = p.id 
+        WHERE c.usuario_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $usuario_id);
     $stmt->execute();
@@ -52,5 +52,14 @@ if ($acao == 'listar') {
             </div>";
         }
     }
+    exit;
+}
+if ($acao == 'contar') {
+    $sql = "SELECT SUM(quantidade) as total FROM carrinho WHERE usuario_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $usuario_id);
+    $stmt->execute();
+    $res = $stmt->get_result()->fetch_assoc();
+    echo json_encode(['total' => $res['total'] ?? 0]);
     exit;
 }

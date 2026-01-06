@@ -44,3 +44,12 @@ function atualizarExibicaoCarrinho() {
         // Aqui também atualizaríamos o valor total se necessário
     });
 }
+
+function atualizarContador() {
+    fetch('ajax_carrinho.php?acao=contar')
+    .then(response => response.json())
+    .then(data => {
+        const badge = document.querySelector('.badge-carrinho');
+        if(badge) badge.innerText = data.total;
+    });
+}

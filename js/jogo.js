@@ -69,7 +69,7 @@ function carregarJogosAleatorios() {
             <img src="${jogo.imagem}" alt="${jogo.nome}">
             <p class="game-title">${jogo.nome}</p>
             <p class="game-price">${jogo.preco}</p>
-            <a href="jogo.html?id=${jogo.id}" class="btn-secondary">Ver detalhes</a>
+            <a href="href="produto.php?id=<?php echo $jogo['slug']; ?>" class="btn-secondary">Ver detalhes</a>
         </div>
     `).join('');
 }
