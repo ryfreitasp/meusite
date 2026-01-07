@@ -19,7 +19,7 @@ function adicionarAoCarrinho(produtoId) {
     formData.append('produto_id', produtoId);
 
     fetch('ajax_carrinho.php', {
-        method: 'POST',
+        method: 'POST', 
         body: formData
     })
     .then(response => response.json())

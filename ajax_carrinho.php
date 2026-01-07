@@ -16,7 +16,7 @@ if (!$usuario_id) {
 if ($acao == 'adicionar') {
     $produto_id = (int)$_POST['produto_id'];
     
-    // Na sua tabela é 'produto_id', no código anterior estava diferente
+    // Insere ou aumenta a quantidade
     $stmt = $conn->prepare("INSERT INTO carrinho (usuario_id, produto_id, quantidade) VALUES (?, ?, 1) ON DUPLICATE KEY UPDATE quantidade = quantidade + 1");
     $stmt->bind_param("ii", $usuario_id, $produto_id);
     
@@ -29,10 +29,10 @@ if ($acao == 'adicionar') {
 }
 
 if ($acao == 'listar') {
-    // AJUSTE: Troquei 'p.imagem' por 'p.capa' que é o nome real na sua tabela do GitHub
-    $sql = "SELECT p.nome, p.preco, p.slug, c.quantidade FROM carrinho c 
-        JOIN produtos p ON c.produto_id = p.id 
-        WHERE c.usuario_id = ?";
+    // AJUSTADO: Usando 'imagem' em vez de 'imagem_capa' para bater com seu banco
+    $sql = "SELECT p.nome, p.preco, p.imagem, c.quantidade FROM carrinho c 
+            JOIN produtos p ON c.produto_id = p.id 
+            WHERE c.usuario_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $usuario_id);
     $stmt->execute();
@@ -44,7 +44,7 @@ if ($acao == 'listar') {
         while ($item = $res->fetch_assoc()) {
             echo "
             <div class='item-carrinho' style='display:flex; align-items:center; gap:10px; margin-bottom:15px; background:#1a1a1a; padding:10px; border-radius:5px;'>
-                <img src='img/{$item['capa']}' style='width:50px; height:60px; object-fit:cover; border-radius:4px;'>
+                <img src='img/{$item['imagem']}' style='width:50px; height:60px; object-fit:cover; border-radius:4px;'>
                 <div style='flex-grow:1;'>
                     <div style='font-size:14px; color:#fff; font-weight:bold;'>{$item['nome']}</div>
                     <div style='color:#8a2be2; font-size:13px;'>R$ " . number_format($item['preco'], 2, ',', '.') . " <span style='color:#666;'>x{$item['quantidade']}</span></div>
@@ -54,6 +54,7 @@ if ($acao == 'listar') {
     }
     exit;
 }
+
 if ($acao == 'contar') {
     $sql = "SELECT SUM(quantidade) as total FROM carrinho WHERE usuario_id = ?";
     $stmt = $conn->prepare($sql);
@@ -63,3 +64,4 @@ if ($acao == 'contar') {
     echo json_encode(['total' => $res['total'] ?? 0]);
     exit;
 }
+?>

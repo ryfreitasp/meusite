@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario_id'])) {
 $jogo_id = isset($_GET['id']) ? strtolower(trim($_GET['id'])) : '';
 if (empty($jogo_id)) { die("Erro: Nenhum jogo selecionado."); }
 
-$stmt = $conn->prepare("SELECT nome, preco FROM produtos WHERE slug = ?");
+$stmt = $conn->prepare("SELECT nome, preco FROM produto WHERE slug = ?");
 $stmt->bind_param("s", $jogo_id);
 $stmt->execute();
 $jogo = $stmt->get_result()->fetch_assoc();

@@ -29,25 +29,6 @@ session_start();
             </nav>
         </div>
         <div id="carrinho-overlay" onclick="toggleCarrinho()"></div>
-
-<aside id="carrinho-lateral" class="carrinho-sidebar">
-    <div class="carrinho-header">
-        <h2 style="color: #fff; margin: 0;"><i class="fas fa-shopping-cart"></i> Meu Carrinho</h2>
-        <button onclick="toggleCarrinho()" class="btn-fechar-carrinho">&times;</button>
-    </div>
-
-    <div id="itens-do-carrinho" class="carrinho-itens">
-        <p style="color: #888; text-align: center;">O seu carrinho está vazio.</p>
-    </div>
-
-    <div class="carrinho-footer">
-        <div class="carrinho-total">
-            <span>Total:</span>
-            <span id="valor-total-carrinho">R$ 0,00</span>
-        </div>
-        <button onclick="irParaCheckout()" class="btn-finalizar">FINALIZAR COMPRA</button>
-    </div>
-</aside>
     </header>
 
     <main class="container">

@@ -30,25 +30,6 @@ session_start();
             </nav>
         </div>
         <div id="carrinho-overlay" onclick="toggleCarrinho()"></div>
-
-<aside id="carrinho-lateral" class="carrinho-sidebar">
-    <div class="carrinho-header">
-        <h2 style="color: #fff; margin: 0;"><i class="fas fa-shopping-cart"></i> Meu Carrinho</h2>
-        <button onclick="toggleCarrinho()" class="btn-fechar-carrinho">&times;</button>
-    </div>
-
-    <div id="itens-do-carrinho" class="carrinho-itens">
-        <p style="color: #888; text-align: center;">O seu carrinho está vazio.</p>
-    </div>
-
-    <div class="carrinho-footer">
-        <div class="carrinho-total">
-            <span>Total:</span>
-            <span id="valor-total-carrinho">R$ 0,00</span>
-        </div>
-        <button onclick="irParaCheckout()" class="btn-finalizar">FINALIZAR COMPRA</button>
-    </div>
-</aside>
     </header>
 
     <main class="container">
@@ -92,25 +73,24 @@ session_start();
     <script>
         // Função para renderizar os jogos no container correto
         function renderizarCatalogo() {
-            const container = document.getElementById('games-container');
-            if (!container) return;
+    const container = document.getElementById('games-container');
+    if (!container) return;
 
-            // Limpa o "R$ 00,00" antigo caso exista
-            container.innerHTML = ""; 
+    container.innerHTML = ""; 
 
-            container.innerHTML = jogos.map(jogo => `
-                <div class="game-card">
-                    ${jogo.novo ? '<span class="badge-novo">Novo</span>' : ''}
-                    <img src="${jogo.imagem}" alt="${jogo.nome}">
-                    <p class="game-title">${jogo.nome} - 25 Dígitos</p>
-                    <p class="game-price">${jogo.preco}</p>
-                    <div class="card-buttons">
-                        <button onclick="adicionarAoCarrinho(<?php echo $jogo['id']; ?>)" class="btn-comprar">Comprar</button>
-                        <a href="produto.php?id=<?php echo $jogo['slug']; ?>">Detalhes</a>
-                    </div>
-                </div>
-            `).join('');
-        }
+    container.innerHTML = jogos.map(jogo => `
+        <div class="game-card">
+            ${jogo.novo ? '<span class="badge-novo">Novo</span>' : ''}
+            <img src="${jogo.imagem}" alt="${jogo.nome}">
+            <p class="game-title">${jogo.nome} - 25 Dígitos</p>
+            <p class="game-price">R$ ${jogo.preco}</p>
+            <div class="card-buttons">
+                <button onclick="adicionarAoCarrinho(${jogo.id})" class="btn-comprar">Comprar</button>
+                <a href="produto.php?id=${jogo.slug}" class="btn-detalhes">Detalhes</a>
+            </div>
+        </div>
+    `).join('');
+}
 
         // Executa assim que a página carrega
         document.addEventListener("DOMContentLoaded", renderizarCatalogo);
