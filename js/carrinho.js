@@ -53,3 +53,27 @@ function atualizarContador() {
         if(badge) badge.innerText = data.total;
     });
 }
+
+function removerDoCarrinho(produtoId) {
+    if(!produtoId) return;
+
+    const formData = new FormData();
+    formData.append('acao', 'remover');
+    formData.append('produto_id', produtoId);
+
+    fetch('ajax_carrinho.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.sucesso) {
+            // O segredo está aqui: chamamos as funções que VOCÊ já criou acima
+            atualizarExibicaoCarrinho(); 
+            atualizarContador(); // Nome corrigido (você tinha escrito atualizarContagemCarrinho)
+        } else {
+            console.error('Erro ao remover:', data.mensagem);
+        }
+    })
+    .catch(error => console.error('Erro na requisição:', error));
+}

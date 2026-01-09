@@ -46,20 +46,19 @@ if (session_status() === PHP_SESSION_NONE) { session_start(); }
 
         <div class="user-area" style="display: flex; align-items: center; gap: 20px;">
             <div class="cart-icon" onclick="toggleCarrinho()" style="cursor:pointer; position: relative;">
-                <i class="fas fa-shopping-cart" style="color: #8a2be2; font-size: 24px;"></i>
-                <span class="badge-carrinho" style="position: absolute; top: -10px; right: -10px; background: #8a2be2; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;">0</span>
-            </div>
+    <i class="fas fa-shopping-cart" style="color: #8a2be2; font-size: 24px;"></i>
+    <span class="badge-carrinho" id="cart-count" style="position: absolute; top: -10px; right: -10px; background: #8a2be2; color: white; border-radius: 50%; padding: 2px 6px; font-size: 12px;">0</span>
+</div>
 
             <?php if (!isset($_SESSION['usuario_id'])): ?>
                 <a href="login.php" class="account-btn">Entrar</a>
             <?php else: ?>
                 <div class="user-dropdown" style="position: relative;">
-                    <button class="user-btn" onclick="toggleUserMenu()">👤</button>
-                    <div id="dropdown-user" class="dropdown-menu" style="display: none; position: absolute; right: 0; background: #1a1a1a; padding: 10px; border-radius: 5px; z-index: 100; min-width: 150px;">
-                        <span style="color: #fff; display: block; margin-bottom: 5px;"><?= $_SESSION['usuario_nome']; ?></span>
-                        <a href="conta.php" style="color: #fff; text-decoration: none; display: block; padding: 5px 0;">Minha Conta</a>
-                        <hr style="border: 0.5px solid #333;">
-                        <a href="logout.php" style="color: #ff4d4d; text-decoration: none; display: block; padding: 5px 0;">Sair</a>
+                    <button class="user-btn" onclick="toggleUserMenu()" style="background:none; border:none; color:white; font-size:20px; cursor:pointer;">👤</button>
+                    <div id="dropdown-user" class="dropdown-menu" style="display: none; position: absolute; right: 0; background: #1a1a1a; padding: 10px; border-radius: 5px; z-index: 100; min-width: 180px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);">
+                        <span style="color: #fff; display: block; margin-bottom: 5px; font-weight: bold; border-bottom: 1px solid #333; padding-bottom: 5px;"><?= $_SESSION['usuario_nome']; ?></span>
+                        <a href="conta.php" style="color: #fff; text-decoration: none; display: block; padding: 8px 0;">Minha Conta</a>
+                        <a href="logout.php" style="color: #ff4d4d; text-decoration: none; display: block; padding: 8px 0;">Sair</a>
                     </div>
                 </div>
             <?php endif; ?>
@@ -115,9 +114,11 @@ if (session_status() === PHP_SESSION_NONE) { session_start(); }
     </div>
 </section>
 
-<footer class="main-footer" style="padding: 40px 0; border-top: 1px solid #333; margin-top: 50px; text-align: center;">
-    <p style="color: #888;">&copy; 2025 Nito Play. Todos os direitos reservados.</p>
-</footer>
+<footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Nito Play. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
 <script src="js/carrinho.js"></script>
 <script>
@@ -144,6 +145,15 @@ window.onclick = function(event) {
         if (dropdown && dropdown.style.display === 'block') dropdown.style.display = 'none';
     }
 }
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Verifica se a função existe no carrinho.js e a executa
+    if(typeof atualizarContador === "function") {
+        atualizarContador();
+    }
+});
 </script>
 </body>
 </html>
