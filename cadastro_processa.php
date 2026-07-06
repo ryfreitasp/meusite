@@ -13,5 +13,8 @@ if ($conn->query($sql) === TRUE) {
     echo "Erro ao cadastrar: " . $conn->error;
 }
 
+header("Location: login.php?sucesso=1");
+exit();
+
 $conn->close();
 ?>
